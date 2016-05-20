@@ -1,0 +1,36 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    ShopifyApp.ready(function(){
+      ShopifyApp.Bar.initialize({
+        title: "Home",
+        icon: "<%= asset_path('favicon.ico') %>"
+      });
+    });
+  </script>
+<% end %>
+
+<h2>Products</h2>
+
+<ul>
+  <% @products.each do |product| %>
+    <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
+    <li>Description: <%= product.body_html %></li>
+      <% if product.variants.count > 1 %>
+        <p>Variants</p>
+        <ul>
+          <% product.variants.each do |variant| %>
+            <li>Title: <%= variant.attributes[:title] %>,
+                Price: <%= variant.attributes[:price] %> $,
+                Weight: <%= variant.attributes[:grams] %> gr</li>
+          <% end %>
+        </ul>
+      <% else %>
+        <li>Title: <%= product.variants.first.attributes[:title] %>,
+            Price: <%= product.variants.first.attributes[:price] %> $,
+            Weight: <%= product.variants.first.attributes[:grams] %> gr</li>
+      <% end %>
+  <% end %>
+
+  <p><%= link_to 'Create_new product', new_product_path %><p>
+</ul>
+
