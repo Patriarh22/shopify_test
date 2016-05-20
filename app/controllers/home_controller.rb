@@ -4,6 +4,11 @@ class HomeController < ShopifyApp::AuthenticatedController
   end
 
   def new_product
+    new_product = ShopifyAPI::Product.new
+    new_product.title = "My product"
+    new_product.save
+    redirect_to :root
   end
+
 
 end

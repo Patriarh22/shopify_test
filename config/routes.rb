@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root :to => 'home#index'
   mount ShopifyApp::Engine, at: '/'
-  get '/new_product', to: 'home#new_product', as: :new_product
+  get '/new_product' => 'home#new_product', as: :new_product
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
